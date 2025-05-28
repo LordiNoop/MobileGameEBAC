@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayScene : MonoBehaviour
 {
+    public PlayerController controller;
+
     public void StartScene()
     {
-        Time.timeScale = 1.0f;
+        controller.StartToRun();
     }
 }

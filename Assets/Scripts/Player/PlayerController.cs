@@ -27,15 +27,18 @@ public class PlayerController : Singleton<PlayerController>
     [Header("CoinSetup")]
     public GameObject coinCollector;
 
+    [Header("Aniamtion")]
+    public AnimatorManager animatorManager;
+
     //privates
-    private bool _canRun = true;
+    private bool _canRun = false;
     private Vector3 _pos;
     private float _currentSpeed;
     private Vector3 _startPosition;
+    private float _baseSpeedToAnimation = 7f;
 
     private void Start()
     {
-        Time.timeScale = 0;
         _startPosition = transform.position;
         ResetSpeed();
     }
@@ -71,19 +74,30 @@ public class PlayerController : Singleton<PlayerController>
 
         if (other.transform.tag == tagToCheckEnemy)
         {
-            if (!invencible) EndGame();
+            if (!invencible)
+            {
+                EndGame(AnimatorManager.AnimationType.DEAD);
+                MoveBack(transform);
+            }
         }
     }
 
-    private void EndGame()
+    private void MoveBack(Transform t)
+    {
+        t.DOMoveZ(-1f, .3f).SetRelative();
+    }
+
+    private void EndGame(AnimatorManager.AnimationType animationType = AnimatorManager.AnimationType.IDLE)
     {
         _canRun = false;
         endScreen.SetActive(true);
+        animatorManager.Play(animationType);
     }
 
     public void StartToRun()
     {
         _canRun = true;
+        animatorManager.Play(AnimatorManager.AnimationType.RUN, _currentSpeed / _baseSpeedToAnimation);
     }
 
     #region POWER UPS
@@ -96,6 +110,7 @@ public class PlayerController : Singleton<PlayerController>
     public void PowerUpSpeedUp(float f)
     {
         _currentSpeed = f;
+        _baseSpeedToAnimation = 3.5f;
     }
 
     public void ResetSpeed()
