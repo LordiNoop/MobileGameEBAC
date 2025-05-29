@@ -131,7 +131,7 @@ public class PlayerController : Singleton<PlayerController>
 
     public void ResetHeight()
     {
-        transform.DOMoveY(_startPosition.y, 1f);
+        transform.DOMoveY(_startPosition.y, .1f);
     }
 
     public void ChangeCoinCollectorSize(float amount)
