@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
     private LevelPieceBasedSetup _currSetup;
 
     public GameObject endLinePiece;
+    private GameObject _endLinePieceSpawned;
 
     private void Awake()
     {
@@ -82,6 +83,9 @@ public class LevelManager : MonoBehaviour
 
         var spawnedEndLinePiece = Instantiate(endLinePiece, container);
         spawnedEndLinePiece.transform.position += new Vector3(0, 0, 10 * _currSetup.piecesNumber);
+        _endLinePieceSpawned = spawnedEndLinePiece;
+
+        ColorManager.Instance.ChangeColorByType(_currSetup.artType);
     }
 
     private void CreateLevelPiece()
@@ -111,6 +115,7 @@ public class LevelManager : MonoBehaviour
         }
 
         _spawnedPieces.Clear();
+        Destroy(_endLinePieceSpawned);
     }
 
     IEnumerator CreateLevelCoroutine()
