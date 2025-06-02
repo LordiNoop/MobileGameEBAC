@@ -360,6 +360,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4013384400249557769, guid: eb62206fd0c73c84e9f65e2cc3a79a45,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1611198a1db59484b977a2175bec4fd2, type: 2}
     - target: {fileID: 5543040749991288443, guid: eb62206fd0c73c84e9f65e2cc3a79a45,
         type: 3}
       propertyPath: m_Name
@@ -809,6 +814,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4013384400249557769, guid: eb62206fd0c73c84e9f65e2cc3a79a45,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1611198a1db59484b977a2175bec4fd2, type: 2}
     - target: {fileID: 5543040749991288443, guid: eb62206fd0c73c84e9f65e2cc3a79a45,
         type: 3}
       propertyPath: m_Name
@@ -962,6 +972,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4013384400249557769, guid: eb62206fd0c73c84e9f65e2cc3a79a45,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1611198a1db59484b977a2175bec4fd2, type: 2}
     - target: {fileID: 5543040749991288443, guid: eb62206fd0c73c84e9f65e2cc3a79a45,
         type: 3}
       propertyPath: m_Name
@@ -1263,6 +1278,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4013384400249557769, guid: eb62206fd0c73c84e9f65e2cc3a79a45,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1611198a1db59484b977a2175bec4fd2, type: 2}
     - target: {fileID: 5543040749991288443, guid: eb62206fd0c73c84e9f65e2cc3a79a45,
         type: 3}
       propertyPath: m_Name

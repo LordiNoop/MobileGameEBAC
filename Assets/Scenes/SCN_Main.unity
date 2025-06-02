@@ -774,8 +774,9 @@ MonoBehaviour:
   levelPieceBasedSetups:
   - {fileID: 11400000, guid: 5936cb89e61bc27418232f4f218fb20d, type: 2}
   - {fileID: 11400000, guid: 5eff37bb3ac15074398f5cd377cafaf1, type: 2}
+  - {fileID: 11400000, guid: 82322811756af9e488af5839b25dafaa, type: 2}
   timeBetweenPieces: 0.3
-  _index: 1
+  _index: 0
   endLinePiece: {fileID: 6245776256105296375, guid: c410c39178d4b5842950bc884bcf2043,
     type: 3}
 --- !u!4 &179703165

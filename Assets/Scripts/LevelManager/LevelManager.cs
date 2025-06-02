@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -26,7 +27,34 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        CreateLevel();
+        
+    }
+
+    private void Start()
+    {
+        if (!PlayerPrefs.HasKey("Level"))
+        {
+            PlayerPrefs.SetInt("Level", _index);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            _index = PlayerPrefs.GetInt("Level");
+
+            if (_index >= levelPieceBasedSetups.Count - 1)
+            {
+                _index = 0;
+            }
+            else
+            {
+                _index++;
+            }
+
+            PlayerPrefs.SetInt("Level", _index);
+            PlayerPrefs.Save();
+        }
+
+            CreateLevel();
     }
 
     private void Update()
