@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using DG.Tweening;
 
 public class LevelManager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class LevelManager : MonoBehaviour
     [Header("Pieces")]
     //public List<LevelPieceBase> levelPieces;
     //public int piecesNumber = 5;
-    public float timeBetweenPieces = .3f;
+    public float timeBetweenPieces = .2f;
 
     [SerializeField] private int _index;
     private GameObject _currentLevel;
@@ -22,13 +23,15 @@ public class LevelManager : MonoBehaviour
     private List<LevelPieceBase> _spawnedPieces = new List<LevelPieceBase>();
     private LevelPieceBasedSetup _currSetup;
 
+    public GameObject startPiece;
+    private GameObject _startPieceSpawned;
     public GameObject endLinePiece;
     private GameObject _endLinePieceSpawned;
 
-    private void Awake()
-    {
-        
-    }
+    [Header("Animation")]
+    public float scaleDuration = .2f;
+    public float scaletimeBetweenPieces = .1f;
+    public Ease ease = Ease.OutBack;
 
     private void Start()
     {
@@ -54,7 +57,7 @@ public class LevelManager : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-            CreateLevel();
+        CreateLevel();
     }
 
     private void Update()
@@ -109,11 +112,17 @@ public class LevelManager : MonoBehaviour
             CreateLevelPiece();
         }
 
+        var spawnedStartPiece = Instantiate(startPiece, container);
+        spawnedStartPiece.transform.position = Vector3.zero;
+        _startPieceSpawned = spawnedStartPiece;
+
         var spawnedEndLinePiece = Instantiate(endLinePiece, container);
         spawnedEndLinePiece.transform.position += new Vector3(0, 0, 10 * _currSetup.piecesNumber);
         _endLinePieceSpawned = spawnedEndLinePiece;
 
         ColorManager.Instance.ChangeColorByType(_currSetup.artType);
+
+        StartCoroutine(ScalePiecesByTime());
     }
 
     private void CreateLevelPiece()
@@ -135,6 +144,31 @@ public class LevelManager : MonoBehaviour
         _spawnedPieces.Add(spawnedPiece);
     }
 
+    IEnumerator ScalePiecesByTime()
+    {
+        _startPieceSpawned.transform.localScale = new Vector3(.1f, .1f, .1f);
+        _endLinePieceSpawned.transform.localScale = new Vector3(.1f, .1f, .1f);
+        foreach (var p in _spawnedPieces)
+        {
+            p.transform.localScale = new Vector3(.1f, .1f, .1f);
+        }
+
+        yield return null;
+
+        _startPieceSpawned.transform.DOScale(1, scaleDuration);
+        yield return new WaitForSeconds(scaletimeBetweenPieces);
+
+        for (int i = 0; i < _spawnedPieces.Count; i++)
+        {
+            _spawnedPieces[i].transform.DOScale(1, scaleDuration).SetEase(ease);
+            yield return new WaitForSeconds(scaletimeBetweenPieces);
+        }
+
+        _endLinePieceSpawned.transform.DOScale(1, scaleDuration);
+
+        CoinsAnimatorManager.Instance.StartAnimations();
+    }
+
     private void CleanSpawnedObject()
     {
         for (int i = _spawnedPieces.Count - 1; i >= 0; i--)
@@ -143,6 +177,7 @@ public class LevelManager : MonoBehaviour
         }
 
         _spawnedPieces.Clear();
+        Destroy(_startPieceSpawned);
         Destroy(_endLinePieceSpawned);
     }
 

@@ -30,6 +30,8 @@ public class PlayerController : Singleton<PlayerController>
     [Header("Aniamtion")]
     public AnimatorManager animatorManager;
 
+    [SerializeField] private BounceHelper _bounceHelper;
+
     //privates
     private bool _canRun = false;
     private Vector3 _pos;
@@ -55,6 +57,14 @@ public class PlayerController : Singleton<PlayerController>
 
         transform.position = Vector3.Lerp(transform.position, _pos, lerpSpeed * Time.deltaTime);
         transform.Translate(transform.forward * Time.deltaTime * _currentSpeed);
+    }
+
+    public void Bounce()
+    {
+        if (_bounceHelper != null)
+        {
+            _bounceHelper.Bounce();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

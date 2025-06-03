@@ -11,7 +11,7 @@ public class ItemCollectableCoin : ItemCollectableBase
 
     private void Start()
     {
-        //CoinsAnimationManager.Instance.RegisterCoin(this);
+        CoinsAnimatorManager.Instance.RegisterCoin(this);
     }
 
     private void Update()
@@ -38,6 +38,6 @@ public class ItemCollectableCoin : ItemCollectableBase
         base.OnCollect();
         //coll.enabled = false;
         collect = true;
-        //PlayerController.Instance.Bounce();
+        PlayerController.Instance.Bounce();
     }
 }
