@@ -43,6 +43,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         _startPosition = transform.position;
         ResetSpeed();
+        ScalePlayer();
     }
 
     private void Update()
@@ -57,6 +58,12 @@ public class PlayerController : Singleton<PlayerController>
 
         transform.position = Vector3.Lerp(transform.position, _pos, lerpSpeed * Time.deltaTime);
         transform.Translate(transform.forward * Time.deltaTime * _currentSpeed);
+    }
+
+    private void ScalePlayer()
+    {
+        transform.localScale = Vector3.zero;
+        transform.DOScale(1, .4f).SetEase(Ease.OutBack);
     }
 
     public void Bounce()
